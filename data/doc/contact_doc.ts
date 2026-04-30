@@ -1,0 +1,327 @@
+import { DocModel } from "../model";
+
+export const contactDoc: DocModel = {
+  slug: "contact",
+  title: "Contact",
+
+  description: "Contact in the address book.",
+  detail:
+    "Use Contact to create, fetch, update, and delete contacts in the address book. " +
+    "Contacts can belong to a container and may also be members of groups. " +
+    "Changes are queued by add(), update(), and delete(), then written with persistChanges().",
+
+  properties: [
+    {
+      name: "identifier",
+      type: "property",
+      access: "none",
+      description: "Unique identifier of the contact.",
+      signature: "identifier: string",
+    },
+    {
+      name: "containerIdentifier",
+      type: "property",
+      access: "none",
+      description: "Identifier of the container the contact belongs to.",
+      signature: "containerIdentifier: string",
+    },
+    {
+      name: "groupIds",
+      type: "property",
+      access: "none",
+      description: "Identifiers of groups this contact belongs to.",
+      signature: "groupIds: string[]",
+    },
+    {
+      name: "givenName",
+      type: "property",
+      access: "none",
+      description: "Given name.",
+      signature: "givenName: string | null",
+    },
+    {
+      name: "familyName",
+      type: "property",
+      access: "none",
+      description: "Family name.",
+      signature: "familyName: string | null",
+    },
+    {
+      name: "middleName",
+      type: "property",
+      access: "none",
+      description: "Middle name.",
+      signature: "middleName: string | null",
+    },
+    {
+      name: "nickname",
+      type: "property",
+      access: "none",
+      description: "Nickname.",
+      signature: "nickname: string | null",
+    },
+    {
+      name: "namePrefix",
+      type: "property",
+      access: "none",
+      description: "Name prefix.",
+      signature: "namePrefix: string | null",
+    },
+    {
+      name: "organizationName",
+      type: "property",
+      access: "none",
+      description: "Organization name.",
+      signature: "organizationName: string | null",
+    },
+    {
+      name: "departmentName",
+      type: "property",
+      access: "none",
+      description: "Department name.",
+      signature: "departmentName: string | null",
+    },
+    {
+      name: "jobTitle",
+      type: "property",
+      access: "none",
+      description: "Job title.",
+      signature: "jobTitle: string | null",
+    },
+    {
+      name: "emailAddresses",
+      type: "property",
+      access: "none",
+      description: "Email addresses.",
+      signature: "emailAddresses: string[]",
+    },
+    {
+      name: "phoneNumbers",
+      type: "property",
+      access: "none",
+      description: "Phone numbers.",
+      signature: "phoneNumbers: string[]",
+    },
+    {
+      name: "urlAddresses",
+      type: "property",
+      access: "none",
+      description: "URL addresses.",
+      signature: "urlAddresses: string[]",
+    },
+    {
+      name: "birthday",
+      type: "property",
+      access: "none",
+      description: "Birthday.",
+      signature: "birthday: Date | null",
+    },
+    {
+      name: "image",
+      type: "property",
+      access: "none",
+      description: "Profile image.",
+      signature: "image: Image | null",
+    },
+    {
+      name: "isBirthdayAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether birthday is available.",
+      signature: "isBirthdayAvailable: boolean",
+    },
+    {
+      name: "isDepartmentNameAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether department name is available.",
+      signature: "isDepartmentNameAvailable: boolean",
+    },
+    {
+      name: "isEmailAddressesAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether email addresses are available.",
+      signature: "isEmailAddressesAvailable: boolean",
+    },
+    {
+      name: "isFamilyNameAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether family name is available.",
+      signature: "isFamilyNameAvailable: boolean",
+    },
+    {
+      name: "isGivenNameAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether given name is available.",
+      signature: "isGivenNameAvailable: boolean",
+    },
+    {
+      name: "isImageAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether image is available.",
+      signature: "isImageAvailable: boolean",
+    },
+    {
+      name: "isJobTitleAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether job title is available.",
+      signature: "isJobTitleAvailable: boolean",
+    },
+    {
+      name: "isMiddleNameAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether middle name is available.",
+      signature: "isMiddleNameAvailable: boolean",
+    },
+    {
+      name: "isNamePrefixAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether name prefix is available.",
+      signature: "isNamePrefixAvailable: boolean",
+    },
+    {
+      name: "isNicknameAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether nickname is available.",
+      signature: "isNicknameAvailable: boolean",
+    },
+    {
+      name: "isOrganizationNameAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether organization name is available.",
+      signature: "isOrganizationNameAvailable: boolean",
+    },
+    {
+      name: "isPhoneNumbersAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether phone numbers are available.",
+      signature: "isPhoneNumbersAvailable: boolean",
+    },
+    {
+      name: "isURLAddressesAvailable",
+      type: "property",
+      access: "none",
+      description: "Whether URL addresses are available.",
+      signature: "isURLAddressesAvailable: boolean",
+    },
+  ],
+
+  methods: [
+    {
+      name: "Contact",
+      type: "constructor",
+      access: "none",
+      description: "Constructs a new contact.",
+      signature: "new Contact()",
+    },
+    {
+      name: "add",
+      type: "method",
+      access: "static",
+      description: "Queues a contact to be added to the address book.",
+      signature:
+        "static add(contact: Contact, containerIdentifier?: string): Promise<void>",
+      params: [
+        {
+          name: "contact",
+          type: "Contact",
+          description: "Contact to add.",
+        },
+        {
+          name: "containerIdentifier",
+          type: "string",
+          description: "Optional container identifier.",
+        },
+      ],
+    },
+    {
+      name: "all",
+      type: "method",
+      access: "static",
+      description: "Fetches contacts, optionally filtered by containers.",
+      signature: "static all(containers?: ContactsContainer[]): Contact[]",
+      params: [
+        {
+          name: "containers",
+          type: "ContactsContainer[]",
+          description: "Optional list of containers.",
+        },
+      ],
+    },
+    {
+      name: "withIdentifier",
+      type: "method",
+      access: "static",
+      description: "Fetches a contact by identifier.",
+      signature: "static withIdentifier(id: string): Promise<Contact | null>",
+      params: [
+        {
+          name: "id",
+          type: "string",
+          description: "Contact identifier.",
+        },
+      ],
+    },
+    {
+      name: "update",
+      type: "method",
+      access: "static",
+      description: "Queues an update to a contact.",
+      signature: "static update(contact: Contact): Promise<void>",
+      params: [
+        {
+          name: "contact",
+          type: "Contact",
+          description: "Contact to update.",
+        },
+      ],
+    },
+    {
+      name: "delete",
+      type: "method",
+      access: "static",
+      description: "Queues a contact to be deleted.",
+      signature: "static delete(contact: Contact): Promise<void>",
+      params: [
+        {
+          name: "contact",
+          type: "Contact",
+          description: "Contact to delete.",
+        },
+      ],
+    },
+    {
+      name: "inGroups",
+      type: "method",
+      access: "static",
+      description: "Fetches contacts in the specified groups.",
+      signature: "static inGroups(groups: ContactsGroup[]): Contact[]",
+      params: [
+        {
+          name: "groups",
+          type: "ContactsGroup[]",
+          description: "Groups to fetch contacts from.",
+        },
+      ],
+    },
+    {
+      name: "persistChanges",
+      type: "method",
+      access: "static",
+      description: "Persists queued changes to the address book.",
+      signature: "static persistChanges(): Promise<void>",
+      params: [],
+    },
+   
+  ],
+};

@@ -1,0 +1,131 @@
+import { DocModel } from "../model";
+
+export const photosDoc: DocModel = {
+  slug: "photos",
+  title: "Photos",
+
+  description: "Provides access to the photo library.",
+  detail:
+    "Use Photos to read from or save to the device photo library. You can fetch the latest photos or screenshots, pick from the library, take a photo with the camera, or save an image.",
+
+  properties: [],
+
+  methods: [
+    {
+      name: "fromCamera",
+      type: "method",
+      access: "static",
+      description: "Opens the camera and returns the captured image.",
+      signature: "static fromCamera(): Promise<Image | null>",
+      params: [],
+      returnType: "Promise<Image | null>",
+      returnDescription: "Captured image bytes, or null.",
+    },
+    {
+      name: "fromLibrary",
+      type: "method",
+      access: "static",
+      description: "Opens the photo library picker and returns the selected image.",
+      signature: "static fromLibrary(): Promise<Image | null>",
+      params: [],
+      returnType: "Promise<Image | null>",
+      returnDescription: "Selected image bytes, or null.",
+    },
+    {
+      name: "latestPhoto",
+      type: "method",
+      access: "static",
+      description: "Returns the most recent photo from the library.",
+      signature: "static latestPhoto(): Promise<Image | null>",
+      params: [],
+      returnType: "Promise<Image | null>",
+      returnDescription: "Latest photo bytes, or null.",
+    },
+    {
+      name: "latestPhotos",
+      type: "method",
+      access: "static",
+      description: "Returns the most recent photos up to the given count.",
+      signature: "static latestPhotos(count: number): Promise<Image[]>",
+      params: [
+        { name: "count", type: "number", description: "Maximum number of photos." },
+      ],
+      returnType: "Promise<Image[]>",
+      returnDescription: "List of latest photo bytes.",
+    },
+    {
+      name: "latestScreenshot",
+      type: "method",
+      access: "static",
+      description: "Returns the most recent screenshot.",
+      signature: "static latestScreenshot(): Promise<Image | null>",
+      params: [],
+      returnType: "Promise<Image | null>",
+      returnDescription: "Latest screenshot bytes, or null.",
+    },
+    {
+      name: "latestScreenshots",
+      type: "method",
+      access: "static",
+      description: "Returns the most recent screenshots up to the given count.",
+      signature: "static latestScreenshots(count: number): Promise<Image[]>",
+      params: [
+        { name: "count", type: "number", description: "Maximum number of screenshots." },
+      ],
+      returnType: "Promise<Image[]>",
+      returnDescription: "List of latest screenshot bytes.",
+    },
+    {
+      name: "save",
+      type: "method",
+      access: "static",
+      description: "Saves an image to the photo library.",
+      signature: "static save(image: Image): Promise<boolean>",
+      params: [
+        { name: "image", type: "Image", description: "Image bytes to save." },
+      ],
+      returnType: "Promise<boolean>",
+      returnDescription: "True if the image was saved.",
+    },
+    {
+      name: "removeLatestPhoto",
+      type: "method",
+      access: "static",
+      description: "Removes the most recent photo from the library.",
+      signature: "static removeLatestPhoto(): Promise<void>",
+      params: [],
+      returnType: "Promise<void>",
+    },
+    {
+      name: "removeLatestPhotos",
+      type: "method",
+      access: "static",
+      description: "Removes the most recent photos up to the given count.",
+      signature: "static removeLatestPhotos(count: number): Promise<void>",
+      params: [
+        { name: "count", type: "number", description: "Maximum number of photos to remove." },
+      ],
+      returnType: "Promise<void>",
+    },
+    {
+      name: "removeLatestScreenshot",
+      type: "method",
+      access: "static",
+      description: "Removes the most recent screenshot.",
+      signature: "static removeLatestScreenshot(): Promise<void>",
+      params: [],
+      returnType: "Promise<void>",
+    },
+    {
+      name: "removeLatestScreenshots",
+      type: "method",
+      access: "static",
+      description: "Removes the most recent screenshots up to the given count.",
+      signature: "static removeLatestScreenshots(count: number): Promise<void>",
+      params: [
+        { name: "count", type: "number", description: "Maximum number of screenshots to remove." },
+      ],
+      returnType: "Promise<void>",
+    },
+  ],
+};
