@@ -47,9 +47,7 @@ export default async function Home({ searchParams }: Props) {
       ]),
     ];
 
-    return searchable.some((v) =>
-  (v ?? "").toLowerCase().includes(q)
-);
+    return searchable.some((v) => (v ?? "").toLowerCase().includes(q));
   }
 
   const filteredDocs = docs.filter(matchDoc);
@@ -71,34 +69,39 @@ export default async function Home({ searchParams }: Props) {
     q ? `/?doc=${slug}&q=${encodeURIComponent(q)}` : `/?doc=${slug}`;
 
   return (
-    <main className="min-h-screen bg-[#f7f7f8] text-neutral-900">
-      <header className="sticky top-0 z-50 h-16 bg-[#111111] text-white flex items-center px-10 justify-between shadow-lg">
-        <div className="flex items-center gap-4">
-          <div className="rounded-xl bg-white text-black px-3 py-1 text-sm font-bold">
-            {"{}"}
-          </div>
-          <h1 className="text-2xl font-bold">Scriptable Docs</h1>
-        </div>
+    <main className="min-h-screen overflow-x-hidden bg-[#f7f7f8] text-neutral-900">
+      <header className="sticky top-0 z-50 bg-[#111111] text-white shadow-lg">
+        <div className="mx-auto flex max-w-[1500px] flex-col gap-3 px-4 py-3 sm:px-6 lg:h-16 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-0">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="shrink-0 rounded-xl bg-white px-3 py-1 text-sm font-bold text-black">
+              {"{}"}
+            </div>
 
-        <form action="/" className="w-[320px]">
-          <input
-            name="q"
-            defaultValue={params?.q ?? ""}
-            placeholder="Search API, method..."
-            className="w-full rounded-xl bg-white/10 px-4 py-2 text-white placeholder:text-white/50 outline-none focus:bg-white/15"
-          />
-        </form>
+            <h1 className="truncate text-xl font-bold sm:text-2xl">
+              Scriptable Docs
+            </h1>
+          </div>
+
+          <form action="/" className="w-full lg:w-[320px]">
+            <input
+              name="q"
+              defaultValue={params?.q ?? ""}
+              placeholder="Search API, method..."
+              className="w-full rounded-xl bg-white/10 px-4 py-2 text-white outline-none placeholder:text-white/50 focus:bg-white/15"
+            />
+          </form>
+        </div>
       </header>
 
-      <div className="grid grid-cols-[260px_1fr_260px] max-w-[1500px] mx-auto">
-        <aside className="sticky top-16 h-[calc(100vh-64px)] overflow-y-auto px-5 py-8 border-r bg-white">
-          <p className="text-xs font-bold tracking-widest text-neutral-400 mb-4">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)_260px]">
+        <aside className="border-b bg-white px-4 py-4 lg:sticky lg:top-16 lg:h-[calc(100vh-64px)] lg:overflow-y-auto lg:border-b-0 lg:border-r lg:px-5 lg:py-8">
+          <p className="mb-3 text-xs font-bold tracking-widest text-neutral-400 lg:mb-4">
             API REFERENCE
           </p>
 
-          <nav className="space-y-1">
+          <nav className="flex gap-2 overflow-x-auto pb-1 lg:block lg:space-y-1 lg:overflow-visible lg:pb-0">
             {filteredDocs.length === 0 && (
-              <p className="text-sm text-neutral-400 px-4 py-2">
+              <p className="shrink-0 px-4 py-2 text-sm text-neutral-400">
                 No API found
               </p>
             )}
@@ -112,14 +115,16 @@ export default async function Home({ searchParams }: Props) {
                   href={withSearch(item.slug)}
                   className={
                     active
-                      ? "block rounded-xl bg-blue-600 text-white px-4 py-2 font-medium shadow-sm"
-                      : "block rounded-xl text-neutral-700 hover:bg-neutral-100 px-4 py-2"
+                      ? "block shrink-0 rounded-xl bg-blue-600 px-4 py-2 font-medium text-white shadow-sm lg:shrink"
+                      : "block shrink-0 rounded-xl px-4 py-2 text-neutral-700 hover:bg-neutral-100 lg:shrink"
                   }
                 >
-                  <div>{item.title}</div>
+                  <div className="whitespace-nowrap lg:whitespace-normal">
+                    {item.title}
+                  </div>
 
                   {q && (
-                    <div className="mt-1 text-xs opacity-70 line-clamp-1">
+                    <div className="mt-1 hidden text-xs opacity-70 line-clamp-1 lg:block">
                       {item.methods
                         .filter((m) => m.name.toLowerCase().includes(q))
                         .map((m) => m.name)
@@ -133,19 +138,21 @@ export default async function Home({ searchParams }: Props) {
           </nav>
         </aside>
 
-        <section className="px-14 py-12">
-          <div className="rounded-3xl bg-white border shadow-sm p-10 mb-10">
-            <p className="text-sm font-bold text-blue-600 mb-4">
+        <section className="min-w-0 px-4 py-6 sm:px-6 lg:px-14 lg:py-12">
+          <div className="mb-8 rounded-2xl border bg-white p-5 shadow-sm sm:p-7 lg:mb-10 lg:rounded-3xl lg:p-10">
+            <p className="mb-3 text-sm font-bold text-blue-600 lg:mb-4">
               DOCUMENTATION
             </p>
 
-            <h2 className="text-6xl font-bold mb-6">{doc.title}</h2>
+            <h2 className="mb-4 break-words text-4xl font-bold sm:text-5xl lg:mb-6 lg:text-6xl">
+              {doc.title}
+            </h2>
 
-            <p className="text-2xl text-neutral-700 mb-6">
+            <p className="mb-4 text-lg text-neutral-700 sm:text-xl lg:mb-6 lg:text-2xl">
               {doc.description}
             </p>
 
-            <p className="text-lg leading-8 text-neutral-600 max-w-3xl">
+            <p className="max-w-3xl text-base leading-7 text-neutral-600 lg:text-lg lg:leading-8">
               {doc.detail}
             </p>
           </div>
@@ -183,8 +190,8 @@ export default async function Home({ searchParams }: Props) {
           </DocGroup>
         </section>
 
-        <aside className="sticky top-16 h-[calc(100vh-64px)] overflow-y-auto px-6 py-8 border-l bg-white">
-          <p className="text-xs font-bold tracking-widest text-neutral-400 mb-4">
+        <aside className="hidden border-l bg-white px-6 py-8 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-64px)] lg:overflow-y-auto">
+          <p className="mb-4 text-xs font-bold tracking-widest text-neutral-400">
             ON THIS PAGE
           </p>
 
@@ -213,9 +220,9 @@ function DocGroup({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mb-12">
-      <h3 className="text-3xl font-bold mb-6">{title}</h3>
-      <div className="space-y-6">{children}</div>
+    <section className="mb-10 lg:mb-12">
+      <h3 className="mb-5 text-3xl font-bold lg:mb-6">{title}</h3>
+      <div className="space-y-5 lg:space-y-6">{children}</div>
     </section>
   );
 }
@@ -255,47 +262,45 @@ function DocSection({
   return (
     <section
       id={toId(title)}
-      className="scroll-mt-24 rounded-2xl bg-white border shadow-sm p-7"
+      className="scroll-mt-28 rounded-2xl border bg-white p-5 shadow-sm sm:p-6 lg:p-7"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <h4 className="text-2xl font-bold flex items-center gap-2">
-          {symbol && (
-            <span className="text-blue-600 font-bold">{symbol}</span>
-          )}
+      <div className="mb-4 flex min-w-0 flex-wrap items-center gap-3">
+        <h4 className="flex min-w-0 items-center gap-2 break-words text-xl font-bold sm:text-2xl">
+          {symbol && <span className="font-bold text-blue-600">{symbol}</span>}
 
-          {title}
+          <span className="min-w-0 break-words">{title}</span>
         </h4>
 
-        <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-500">
+        <span className="shrink-0 rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-500">
           {type}
         </span>
       </div>
 
-      <p className="text-neutral-700 mb-5 leading-7">{desc}</p>
+      <p className="mb-5 leading-7 text-neutral-700">{desc}</p>
 
       {code && (
-        <pre className="rounded-xl bg-[#111111] text-white px-5 py-4 text-sm font-mono overflow-x-auto mb-5">
-          <code>{code}</code>
+        <pre className="mb-5 max-w-full overflow-x-auto rounded-xl bg-[#111111] px-4 py-4 text-sm text-white sm:px-5">
+          <code className="font-mono whitespace-pre">{code}</code>
         </pre>
       )}
 
       {params && params.length > 0 && (
         <div className="mb-5">
-          <h5 className="font-bold mb-2">Parameters</h5>
+          <h5 className="mb-2 font-bold">Parameters</h5>
 
           <div className="space-y-2">
             {params.map((param) => (
               <div
                 key={param.name}
-                className="rounded-xl bg-neutral-50 border px-4 py-3"
+                className="rounded-xl border bg-neutral-50 px-4 py-3"
               >
-                <div className="font-mono text-sm">
+                <div className="break-words font-mono text-sm">
                   <span className="font-bold">{param.name}</span>
                   <span className="text-neutral-500">: {param.type}</span>
                 </div>
 
                 {param.description && (
-                  <p className="text-sm text-neutral-600 mt-1">
+                  <p className="mt-1 text-sm text-neutral-600">
                     {param.description}
                   </p>
                 )}
@@ -307,13 +312,13 @@ function DocSection({
 
       {returnType && (
         <div>
-          <h5 className="font-bold mb-2">Returns</h5>
+          <h5 className="mb-2 font-bold">Returns</h5>
 
-          <div className="rounded-xl bg-neutral-50 border px-4 py-3">
-            <div className="font-mono text-sm">{returnType}</div>
+          <div className="rounded-xl border bg-neutral-50 px-4 py-3">
+            <div className="break-words font-mono text-sm">{returnType}</div>
 
             {returnDescription && (
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 {returnDescription}
               </p>
             )}
