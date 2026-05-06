@@ -48,59 +48,90 @@ import { widgetImageDoc } from "./doc/widgetImage_doc";
 import { widgetSpacerDoc } from "./doc/widgetSpacer_doc";
 import { widgetStackDoc } from "./doc/widgetStack_doc";
 import { widgetTextDoc } from "./doc/widgetText_doc";
+import { argsDoc } from "./doc/arg_doc";
+import { reminderDoc } from "./doc/reminder_doc";
+import { speechDoc } from "./doc/speech_doc";
+import { uuidDoc } from "./doc/uuid_doc";
+import { xmlParserDoc } from "./doc/xmlparse_doc";
 export const docs = [
   alertDoc,
+  argsDoc,
+
   calendarDoc,
   calendarEventDoc,
-  callbackUrlDoc,  
+  callbackUrlDoc,
+
   colorDoc,
   consoleDoc,
+
   contactDoc,
   contactsContainerDoc,
   contactsGroupDoc,
+
   dataDoc,
+
   dateFormatterDoc,
   datePickerDoc,
+
   deviceDoc,
   dictationDoc,
   documentPickerDoc,
   drawContextDoc,
+
   fileManagerDoc,
   fontDoc,
+
   imageDoc,
   importModuleDoc,
+
   keychainDoc,
+
   linearGradientDoc,
   listWidgetDoc,
   locationDoc,
+
   mailDoc,
   messageDoc,
   moduleDoc,
+
   notificationDoc,
+
   pathDoc,
   photosDoc,
   pointDoc,
+
   quickLookDoc,
   rectDoc,
   relativeDateTimeFormatterDoc,
+
+  reminderDoc,
   requestDoc,
+
   safariDoc,
   scriptDoc,
   sfSymbolDoc,
   shareSheetDoc,
   sizeDoc,
+  speechDoc,
+
   textFieldDoc,
   timerDoc,
+
   uiTableDoc,
   uiTableCellDoc,
   uiTableRowDoc,
+
   urlSchemeDoc,
+  uuidDoc,
+
   webViewDoc,
   widgetDateDoc,
   widgetImageDoc,
   widgetSpacerDoc,
   widgetStackDoc,
   widgetTextDoc,
+
+  xmlParserDoc,
 ];
 
 export function getDoc(slug: string) {
